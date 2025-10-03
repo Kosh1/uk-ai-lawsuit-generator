@@ -110,7 +110,7 @@ export function HeroSection({ config, utm, landingType }: HeroSectionProps) {
                 Example Document
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                See what you'll get in just 2 minutes
+                See what you&apos;ll get in just 2 minutes
               </p>
             </div>
             
