@@ -5,7 +5,7 @@ export function ComparisonSection() {
   const features = [
     { feature: "Professional quality documents", ai: true, traditional: true },
     { feature: "Ready in 2 minutes", ai: true, traditional: false },
-    { feature: "Costs £0-£5", ai: true, traditional: false },
+    { feature: "Completely free", ai: true, traditional: false },
     { feature: "Available 24/7", ai: true, traditional: false },
     { feature: "100% confidential", ai: true, traditional: true },
     { feature: "No legal knowledge required", ai: true, traditional: false },
@@ -57,8 +57,8 @@ export function ComparisonSection() {
             </CardHeader>
             <CardContent>
               <div className="text-center mb-6">
-                <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">£5</div>
-                <div className="text-sm text-gray-600 dark:text-gray-300">per document</div>
+                <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">Free</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">forever</div>
               </div>
               <div className="space-y-4">
                 {features.map((item, index) => (

@@ -98,7 +98,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## API Endpoints
 
 - `POST /api/chat` - Main chat endpoint for AI conversations
-- `POST /api/payments` - Payment processing (future feature)
 
 ## Landing Page Types
 

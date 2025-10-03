@@ -37,19 +37,7 @@ export async function POST(req: NextRequest) {
     }
 
     // --- Function description for function calling ---
-    const functions = [
-      {
-        name: "save_phone",
-        description: "Saves phone number and time for solicitor consultation",
-        parameters: {
-          type: "object",
-          properties: {
-            phone: { type: "string", description: "User's phone number" }
-          },
-          required: ["phone"]
-        }
-      }
-    ];
+    const functions: any[] = [];
 
     // Get appropriate prompt based on landing type
     const lawyerPrompt = getUKLawyerPrompt(landingType);
@@ -124,27 +112,7 @@ export async function POST(req: NextRequest) {
       console.error('Error saving messages:', messageError);
     }
 
-    // Handle function calls
-    if (functionCall && functionCall.name === 'save_phone') {
-      const phoneNumber = functionCall.arguments ? JSON.parse(functionCall.arguments).phone : null;
-      
-      if (phoneNumber) {
-        // Save phone number to database
-        const { error: phoneError } = await supabase
-          .from('user_contacts')
-          .insert([
-            {
-              session_id: currentSessionId,
-              phone: phoneNumber,
-              created_at: new Date().toISOString(),
-            }
-          ]);
-
-        if (phoneError) {
-          console.error('Error saving phone:', phoneError);
-        }
-      }
-    }
+    // Handle function calls - currently none
 
     return NextResponse.json({
       message: assistantMessage,
