@@ -55,7 +55,7 @@ export function HeroSection({ config, utm, landingType }: HeroSectionProps) {
             </div>
 
             {/* Features */}
-            <div className="flex flex-wrap gap-6">
+            <div className="flex items-center justify-start gap-8 flex-wrap">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
                   <Clock className="w-3 h-3 text-green-600 dark:text-green-400" />
