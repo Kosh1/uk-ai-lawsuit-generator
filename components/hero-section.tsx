@@ -55,24 +55,24 @@ export function HeroSection({ config, utm, landingType }: HeroSectionProps) {
             </div>
 
             {/* Features */}
-            <div className="grid grid-cols-3 gap-4">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-2">
-                  <Clock className="w-4 h-4 text-green-600 dark:text-green-400" />
+            <div className="flex flex-wrap gap-6">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
+                  <Clock className="w-3 h-3 text-green-600 dark:text-green-400" />
                 </div>
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">2 minutes</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">2 minutes</span>
               </div>
-              <div className="flex flex-col items-center text-center">
-                <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-2">
-                  <Shield className="w-4 h-4 text-green-600 dark:text-green-400" />
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-3 h-3 text-green-600 dark:text-green-400" />
                 </div>
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">100% confidential</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">Confidential</span>
               </div>
-              <div className="flex flex-col items-center text-center">
-                <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-2">
-                  <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400" />
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-3 h-3 text-green-600 dark:text-green-400" />
                 </div>
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Professional quality</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">Professional</span>
               </div>
             </div>
 
