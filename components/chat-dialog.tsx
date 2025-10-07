@@ -43,52 +43,58 @@ export function ChatDialog({ isOpen, onClose, initialMessage = "", utm, landingT
       content: message,
     };
 
-    setMessages(prev => [...prev, userMessage]);
-
-    try {
-      const response = await fetch('/api/chat', {
+    setMessages(prev => {
+      const newMessages = [...prev, userMessage];
+      
+      // Send API request with updated messages
+      fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          messages: [...messages, userMessage],
+          messages: newMessages,
           sessionId,
         }),
+      })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error('Failed to send message');
+        }
+
+        const data = await response.json();
+        
+        setMessages(prevMessages => [...prevMessages, {
+          role: 'assistant',
+          content: data.message,
+        }]);
+
+        if (data.sessionId && !sessionId) {
+          setSessionId(data.sessionId);
+        }
+      })
+      .catch((error) => {
+        console.error('Error sending message:', error);
+        setMessages(prevMessages => [...prevMessages, {
+          role: 'assistant',
+          content: 'Sorry, there was an error processing your request. Please try again.',
+        }]);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to send message');
-      }
+      return newMessages;
+    });
 
-      const data = await response.json();
-      
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        content: data.message,
-      }]);
-
-      if (data.sessionId && !sessionId) {
-        setSessionId(data.sessionId);
-      }
-
-    } catch (error) {
-      console.error('Error sending message:', error);
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        content: 'Sorry, there was an error processing your request. Please try again.',
-      }]);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [messages, sessionId, isLoading]);
+  }, [sessionId, isLoading]);
 
   useEffect(() => {
-    if (isOpen && initialMessage) {
+    if (isOpen && initialMessage && messages.length === 0) {
       setInput(initialMessage);
       handleSendMessage(initialMessage);
     }
-  }, [isOpen, initialMessage, handleSendMessage]);
+  }, [isOpen, initialMessage]);
 
 
   const handleSubmit = (e: React.FormEvent) => {
