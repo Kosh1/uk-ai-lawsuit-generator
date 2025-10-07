@@ -27,7 +27,7 @@ export function HeroSection({ config, utm, landingType }: HeroSectionProps) {
   return (
     <section className="relative py-16 px-6 bg-gradient-to-br from-blue-50/30 via-white to-indigo-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
       <div className="relative container mx-auto max-w-6xl">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           
           {/* Left Column - Main Content */}
           <div className="space-y-6">
@@ -77,7 +77,7 @@ export function HeroSection({ config, utm, landingType }: HeroSectionProps) {
             </div>
 
             {/* Input Form */}
-            <Card className="shadow-lg bg-white dark:bg-gray-800">
+            <Card className="shadow-lg bg-white dark:bg-gray-800 min-h-[200px]">
               <CardContent className="p-6">
                 <div className="space-y-4">
                   <Textarea
@@ -101,7 +101,7 @@ export function HeroSection({ config, utm, landingType }: HeroSectionProps) {
           </div>
 
           {/* Right Column - Example */}
-          <div className="space-y-4">
+          <div className="space-y-4 lg:sticky lg:top-8">
             <div className="text-center lg:text-left">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                 Example Document
