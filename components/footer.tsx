@@ -29,10 +29,10 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Support</h3>
             <ul className="space-y-2 text-gray-400">
-              <li>How it works</li>
-              <li>FAQ</li>
-              <li>Examples</li>
-              <li>Contact us</li>
+              <li><a href="#how-it-works" className="hover:text-white">How it works</a></li>
+              <li><a href="#faq" className="hover:text-white">FAQ</a></li>
+              <li><a href="#examples" className="hover:text-white">Examples</a></li>
+              <li><a href="/contact" className="hover:text-white">Contact us</a></li>
             </ul>
           </div>
 
@@ -61,9 +61,9 @@ export function Footer() {
               © 2024 AI Legal Assistant UK. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
-              <a href="#" className="text-gray-400 hover:text-white text-sm">Terms of Service</a>
-              <a href="#" className="text-gray-400 hover:text-white text-sm">Cookie Policy</a>
+              <a href="/privacy" className="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
+              <a href="/about" className="text-gray-400 hover:text-white text-sm">About Us</a>
+              <a href="/contact" className="text-gray-400 hover:text-white text-sm">Contact</a>
             </div>
           </div>
         </div>
