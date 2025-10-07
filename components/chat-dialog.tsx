@@ -72,12 +72,6 @@ export function ChatDialog({ isOpen, onClose, initialMessage = "", utm, landingT
         setSessionId(data.sessionId);
       }
 
-      // Handle function calls (like save_phone)
-      if (data.functionCall) {
-        // Function call handled on server side
-        console.log('Function call executed:', data.functionCall);
-      }
-
     } catch (error) {
       console.error('Error sending message:', error);
       setMessages(prev => [...prev, {

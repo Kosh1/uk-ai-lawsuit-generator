@@ -36,9 +36,6 @@ export async function POST(req: NextRequest) {
       landingType = utm.landing_type;
     }
 
-    // --- Function description for function calling ---
-    const functions: any[] = [];
-
     // Get appropriate prompt based on landing type
     const lawyerPrompt = getUKLawyerPrompt(landingType);
 
@@ -53,19 +50,16 @@ export async function POST(req: NextRequest) {
 
     console.log('Sending request to OpenAI with messages:', formattedMessages)
 
-    // --- OpenAI call with function_call support ---
+    // --- OpenAI API call ---
     const completion = await openai.chat.completions.create({
-      model: "gpt-4", 
+      model: "gpt-4.1", 
       messages: formattedMessages,
       temperature: 0.7,
       max_tokens: 2000,
-      functions,
-      function_call: "auto"
     });
 
     const choice = completion.choices[0];
     let assistantMessage = choice.message?.content || '';
-    let functionCall = choice.message?.function_call;
 
     let currentSessionId = sessionId;
 
@@ -112,12 +106,9 @@ export async function POST(req: NextRequest) {
       console.error('Error saving messages:', messageError);
     }
 
-    // Handle function calls - currently none
-
     return NextResponse.json({
       message: assistantMessage,
       sessionId: currentSessionId,
-      functionCall: functionCall
     });
 
   } catch (error) {
