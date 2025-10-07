@@ -18,7 +18,7 @@ export default function ContactPage() {
           
           <div className="prose prose-lg max-w-none">
             <p className="text-gray-600 mb-6">
-              Need help with your legal documents? Have questions about our service? We're here to help.
+              Need help with your legal documents? Have questions about our service? We&apos;re here to help.
             </p>
             
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Get Support</h2>
@@ -53,7 +53,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">Can I get a refund?</h3>
-                <p className="text-gray-600">We offer refunds within 7 days if you're not satisfied with the generated document.</p>
+                <p className="text-gray-600">We offer refunds within 7 days if you&apos;re not satisfied with the generated document.</p>
               </div>
             </div>
             

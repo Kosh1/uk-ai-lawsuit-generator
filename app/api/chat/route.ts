@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { v4 as uuidv4 } from 'uuid';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 import { getUKLawyerPrompt } from '@/lib/prompts';
 import type { ChatMessage, UTMData } from '@/lib/types';
 
@@ -66,6 +66,7 @@ export async function POST(req: NextRequest) {
     // Create new session only if it doesn't exist
     if (!currentSessionId) {
       const newSessionId = uuidv4();
+      const supabase = getSupabase();
       const { error: sessionError } = await supabase
         .from('chat_sessions')
         .insert([
@@ -85,6 +86,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Save messages to database
+    const supabase = getSupabase();
     const { error: messageError } = await supabase
       .from('chat_messages')
       .insert([

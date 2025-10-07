@@ -94,7 +94,7 @@ export function ChatDialog({ isOpen, onClose, initialMessage = "", utm, landingT
       setInput(initialMessage);
       handleSendMessage(initialMessage);
     }
-  }, [isOpen, initialMessage]);
+  }, [isOpen, initialMessage, messages.length, handleSendMessage]);
 
 
   const handleSubmit = (e: React.FormEvent) => {
