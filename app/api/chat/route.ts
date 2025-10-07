@@ -66,46 +66,54 @@ export async function POST(req: NextRequest) {
     // Create new session only if it doesn't exist
     if (!currentSessionId) {
       const newSessionId = uuidv4();
-      const supabase = getSupabase();
-      const { error: sessionError } = await supabase
-        .from('chat_sessions')
-        .insert([
-          {
-            id: newSessionId,
-            user_id: userId, // save userId
-            initial_message: messages[0].content,
-            created_at: new Date().toISOString(),
-            utm: utm || null,
-          },
-        ]);
-      if (sessionError) {
-        console.error('Error creating session:', sessionError);
-      } else {
-        currentSessionId = newSessionId;
+      try {
+        const supabase = getSupabase();
+        const { error: sessionError } = await (supabase as any)
+          .from('chat_sessions')
+          .insert([
+            {
+              id: newSessionId,
+              user_id: userId || null,
+              initial_message: messages[0].content,
+              created_at: new Date().toISOString(),
+              utm: utm || null,
+            },
+          ]);
+        if (sessionError) {
+          console.error('Error creating session:', sessionError);
+        } else {
+          currentSessionId = newSessionId;
+        }
+      } catch (error) {
+        console.error('Error with Supabase session creation:', error);
       }
     }
 
     // Save messages to database
-    const supabase = getSupabase();
-    const { error: messageError } = await supabase
-      .from('chat_messages')
-      .insert([
-        {
-          session_id: currentSessionId,
-          role: 'user',
-          content: messages[messages.length - 1].content,
-          created_at: new Date().toISOString(),
-        },
-        {
-          session_id: currentSessionId,
-          role: 'assistant',
-          content: assistantMessage,
-          created_at: new Date().toISOString(),
-        }
-      ]);
-
-    if (messageError) {
-      console.error('Error saving messages:', messageError);
+    try {
+      const supabase = getSupabase();
+      const { error: messageError } = await (supabase as any)
+        .from('chat_messages')
+        .insert([
+          {
+            session_id: currentSessionId,
+            role: 'user',
+            content: messages[messages.length - 1].content,
+            created_at: new Date().toISOString(),
+          },
+          {
+            session_id: currentSessionId,
+            role: 'assistant',
+            content: assistantMessage,
+            created_at: new Date().toISOString(),
+          }
+        ]);
+      
+      if (messageError) {
+        console.error('Error saving messages:', messageError);
+      }
+    } catch (error) {
+      console.error('Error with Supabase message saving:', error);
     }
 
     return NextResponse.json({

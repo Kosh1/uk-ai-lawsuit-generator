@@ -1,5 +1,5 @@
 export interface ChatMessage {
-  role: 'user' | 'assistant' | 'system';
+  role: 'user' | 'assistant';
   content: string;
 }
 
@@ -8,8 +8,8 @@ export interface ChatSession {
   user_id?: string;
   initial_message: string;
   created_at: string;
-  utm?: Record<string, string> | null;
-  document_type?: 'lba' | 'claim';
+  utm?: UTMData | null;
+  document_type?: string;
 }
 
 export interface UTMData {
@@ -19,4 +19,61 @@ export interface UTMData {
   utm_term?: string;
   utm_content?: string;
   landing_type?: string;
+}
+
+// Supabase database types
+export interface Database {
+  public: {
+    Tables: {
+      chat_sessions: {
+        Row: {
+          id: string;
+          user_id: string | null;
+          initial_message: string;
+          created_at: string;
+          utm: any | null;
+          document_type: string | null;
+        };
+        Insert: {
+          id: string;
+          user_id?: string | null;
+          initial_message: string;
+          created_at?: string;
+          utm?: any | null;
+          document_type?: string | null;
+        };
+        Update: {
+          id?: string;
+          user_id?: string | null;
+          initial_message?: string;
+          created_at?: string;
+          utm?: any | null;
+          document_type?: string | null;
+        };
+      };
+      chat_messages: {
+        Row: {
+          id: string;
+          session_id: string;
+          role: string;
+          content: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          session_id: string;
+          role: string;
+          content: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          session_id?: string;
+          role?: string;
+          content?: string;
+          created_at?: string;
+        };
+      };
+    };
+  };
 }
